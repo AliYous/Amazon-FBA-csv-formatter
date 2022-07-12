@@ -15,6 +15,5 @@ export const downloadCsv = (csv) => {
   const link = document.createElement("a");
   link.href = csvUrl;
   link.download = "helium10.csv";
-  console.log(link);
   link.click();
 };

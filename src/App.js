@@ -7,12 +7,18 @@ const StyledApp = styled(Grid)({
   height: "100vh",
   width: "100%",
 });
-const App = () => {
-  // const headerKeys = Object.keys(Object.assign({}, ...array));
 
+const StyledDropzoneContainer = styled(Grid)({
+  height: "50vh",
+  width: "55rem",
+});
+
+const App = () => {
   return (
     <StyledApp container id="App" justifyContent="center" alignItems="center">
-      <DropzoneCSVImporter />
+      <StyledDropzoneContainer>
+        <DropzoneCSVImporter />
+      </StyledDropzoneContainer>
     </StyledApp>
   );
 };

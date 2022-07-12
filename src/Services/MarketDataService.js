@@ -3,6 +3,7 @@ import {
   filterPPCListings,
   findHighPerformers,
   formatProductsList,
+  convertAllValuesToStringAndReplaceCommas,
 } from "../lib/helpers/productsListHelper";
 
 /* 
@@ -28,5 +29,9 @@ export const getMarketDataFromCsv = async (file) => {
   const sortedHighPerformersList = highPerformersList.sort((a, b) => {
     return b.monthlyRevenue - a.monthlyRevenue;
   });
+  const finalFormatedProductsList = convertAllValuesToStringAndReplaceCommas(
+    sortedHighPerformersList
+  );
+  console.log(finalFormatedProductsList);
   return sortedHighPerformersList;
 };

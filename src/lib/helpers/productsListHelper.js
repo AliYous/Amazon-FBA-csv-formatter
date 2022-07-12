@@ -3,7 +3,7 @@ import { helium10KeysMap } from "../keysMap";
 export const formatProductsList = (productsList) => {
   return productsList.map((virginProduct) => {
     let product = cleanAllProductKeys({ product: virginProduct });
-    const formattedProduct = {};
+    let formattedProduct = {};
     helium10KeysMap.forEach((keyMap) => {
       const { currentKey, newKey } = keyMap;
       if (product[currentKey]) {
@@ -12,6 +12,24 @@ export const formatProductsList = (productsList) => {
     });
 
     return formattedProduct;
+  });
+};
+
+export const convertAllValuesToStringAndReplaceCommas = (productsList) => {
+  return productsList.map((product) => {
+    const tempProduct = {};
+    Object.keys(product).forEach((key) => {
+      if (typeof product[key] === "number") {
+        if (key === "monthlyRevenue") {
+          tempProduct[key] = Math.round(product[key])
+            .toString()
+            .replace(".", ",");
+        } else {
+          tempProduct[key] = product[key].toString().replace(".", ",");
+        }
+      }
+    });
+    return { ...product, ...tempProduct };
   });
 };
 
