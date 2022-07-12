@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Dropzone from "react-dropzone";
+import { downloadCsv, unparseArray } from "../lib/helpers/csvHelper";
 import { getMarketDataFromCsv } from "../Services/MarketDataService";
 
 const DropzoneCSVImporter = () => {
   const handleFilesDrop = async (files) => {
-    const marketDataObject = await getMarketDataFromCsv(files[0]);
-    console.log(marketDataObject);
+    const marketDataArray = await getMarketDataFromCsv(files[0]);
+    const unparsedMarketDataCsv = unparseArray(marketDataArray);
+    downloadCsv(unparsedMarketDataCsv);
   };
 
   return (
