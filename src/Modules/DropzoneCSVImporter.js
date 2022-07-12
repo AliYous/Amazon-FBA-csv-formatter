@@ -3,11 +3,7 @@ import { Box } from "@mui/material";
 import React from "react";
 
 import Dropzone from "react-dropzone";
-import {
-  downloadCsv,
-  unparseArray,
-  convertObjectToCSV,
-} from "../lib/helpers/csvHelper";
+import { downloadCsv, unparseArray } from "../lib/helpers/csvHelper";
 import { getMarketDataFromCsv } from "../Services/MarketDataService";
 import palette from "../theme/palette";
 import { TbDragDrop as DragDropIcon } from "react-icons/tb";
@@ -29,9 +25,13 @@ const StyledDropzone = styled(Box)({
   },
 });
 
-const DropzoneCSVImporter = () => {
+const DropzoneCSVImporter = ({ inputData }) => {
   const handleFilesDrop = async (files) => {
-    const marketDataArray = await getMarketDataFromCsv(files[0]);
+    const marketDataArray = await getMarketDataFromCsv({
+      file: files[0],
+      inputData,
+    });
+
     console.log(marketDataArray);
     const unparsedMarketDataCsv = unparseArray(marketDataArray);
     downloadCsv(unparsedMarketDataCsv);

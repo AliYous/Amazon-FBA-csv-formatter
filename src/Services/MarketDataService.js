@@ -3,6 +3,7 @@ import {
   filterPPCListings,
   findHighPerformers,
   formatProductsList,
+  addInputDataToEachProduct,
   convertAllValuesToStringAndReplaceCommas,
 } from "../lib/helpers/productsListHelper";
 
@@ -10,7 +11,7 @@ import {
 Takes a csv from helium10 and returns a sorted list of top competitors
  with all relevant data for the sheets calculations
 */
-export const getMarketDataFromCsv = async (file) => {
+export const getMarketDataFromCsv = async ({ file, inputData }) => {
   const productsList = await parseCsv(file);
 
   // format the object in a more dev friendly format
@@ -29,8 +30,15 @@ export const getMarketDataFromCsv = async (file) => {
   const sortedHighPerformersList = highPerformersList.sort((a, b) => {
     return b.monthlyRevenue - a.monthlyRevenue;
   });
+
+  const highPerformersListWithInputData = addInputDataToEachProduct({
+    productsList: sortedHighPerformersList,
+    inputData,
+  });
+
+  // Always keep as last step
   const finalFormatedProductsList = convertAllValuesToStringAndReplaceCommas(
-    sortedHighPerformersList
+    highPerformersListWithInputData
   );
   return finalFormatedProductsList;
 };

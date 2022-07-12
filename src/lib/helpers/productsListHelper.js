@@ -52,3 +52,19 @@ export const findHighPerformers = ({ productsList, minRevenue = 10000 }) => {
 export const filterPPCListings = (productsList) => {
   return productsList.filter(({ title }) => title.indexOf("($)") === -1);
 };
+
+export const addInputDataToEachProduct = ({
+  productsList,
+  inputCOGS,
+  inputFbaFee,
+  inputStorageFee,
+  inputTargetPrice,
+}) => {
+  return productsList.map((product) => ({
+    ...product,
+    cogs: inputCOGS,
+    fbaFee: inputFbaFee,
+    storageFee: inputStorageFee,
+    targetPrice: inputTargetPrice,
+  }));
+};
