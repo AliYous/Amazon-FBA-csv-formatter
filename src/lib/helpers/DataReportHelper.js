@@ -1,13 +1,14 @@
 import { helium10KeysMap } from "../keysMap";
 
 export const turnSoftwareDataToFormattedCSV = (virginProductsList) => {
-  const productsList = renameCsvKeys({
+  let productsList = formatProductsList({
     productsList: virginProductsList,
   });
-  //   console.log(productsList);
+
+  // console.log(productsList);
 };
 
-const renameCsvKeys = ({ productsList }) => {
+const formatProductsList = ({ productsList }) => {
   return productsList.map((virginProduct) => {
     let product = cleanAllProductKeys({ product: virginProduct });
     helium10KeysMap.forEach((keyMap) => {
@@ -28,7 +29,6 @@ const cleanAllProductKeys = ({ product }) => {
     delete product[key];
     return product;
   });
-  console.log(cleanedProduct.ASIN);
 
   return cleanedProduct;
 };

@@ -1,62 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { turnSoftwareDataToFormattedCSV } from "./lib/helpers/DataReportHelper";
-import Papa from "papaparse";
+import styled from "@emotion/styled";
+import { Box, Grid } from "@mui/material";
+import React from "react";
+import DropzoneCSVImporter from "./Modules/DropzoneCSVImporter";
+
+const StyledApp = styled(Grid)({
+  height: "100vh",
+  width: "100%",
+});
 const App = () => {
-  const [array, setArray] = useState([]);
-
-  const parseFile = (file) => {
-    Papa.parse(file, {
-      header: true,
-      complete: (results) => {
-        setArray(results.data);
-      },
-    });
-  };
-
-  const handleOnSubmit = (e) => {
-    parseFile(e.target.files[0]);
-  };
-
-  useEffect(() => {
-    turnSoftwareDataToFormattedCSV(array);
-  }, [array]);
-
-  const headerKeys = Object.keys(Object.assign({}, ...array));
+  // const headerKeys = Object.keys(Object.assign({}, ...array));
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h1>REACTJS CSV IMPORT EXAMPLE </h1>
-      <form>
-        <input
-          type={"file"}
-          id={"csvFileInput"}
-          accept={".csv"}
-          onChange={handleOnSubmit}
-        />
-      </form>
-
-      <br />
-
-      <table>
-        <thead>
-          <tr key={"header"}>
-            {headerKeys.map((key) => (
-              <th>{key}</th>
-            ))}
-          </tr>
-        </thead>
-
-        <tbody>
-          {array.map((item) => (
-            <tr key={item.id}>
-              {Object.values(item).map((val) => (
-                <td>{val}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <StyledApp container id="App" justifyContent="center" alignItems="center">
+      <DropzoneCSVImporter />
+    </StyledApp>
   );
 };
 
