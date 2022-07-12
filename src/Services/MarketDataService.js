@@ -32,6 +32,5 @@ export const getMarketDataFromCsv = async (file) => {
   const finalFormatedProductsList = convertAllValuesToStringAndReplaceCommas(
     sortedHighPerformersList
   );
-  console.log(finalFormatedProductsList);
-  return sortedHighPerformersList;
+  return finalFormatedProductsList;
 };

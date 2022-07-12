@@ -3,7 +3,11 @@ import { Box } from "@mui/material";
 import React from "react";
 
 import Dropzone from "react-dropzone";
-import { downloadCsv, unparseArray } from "../lib/helpers/csvHelper";
+import {
+  downloadCsv,
+  unparseArray,
+  convertObjectToCSV,
+} from "../lib/helpers/csvHelper";
 import { getMarketDataFromCsv } from "../Services/MarketDataService";
 import palette from "../theme/palette";
 import { TbDragDrop as DragDropIcon } from "react-icons/tb";
