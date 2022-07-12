@@ -1,32 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Papa from "papaparse";
-import { turnSoftwareDataToFormattedCSV } from "../lib/helpers/DataReportHelper";
-import { Box } from "@mui/material";
+import React, { useState } from "react";
+
 import Dropzone from "react-dropzone";
-import CSVToArray from "csv-to-array-browser";
+import { getMarketDataFromCsv } from "../Services/MarketDataService";
 
 const DropzoneCSVImporter = () => {
-  const [productsList, setProductsList] = useState([]);
-
-  const parseCsv = async (file) => {
-    const convertedData = await CSVToArray(file);
-    console.log(convertedData);
-
-    // Papa.parse(file, {
-    //   header: true,
-    //   complete: (results) => {
-    //     console.log(results.data);
-    //     setProductsList(results.data);
-    //   },
-    // });
+  const handleFilesDrop = async (files) => {
+    const marketDataObject = await getMarketDataFromCsv(files[0]);
+    console.log(marketDataObject);
   };
 
-  useEffect(() => {
-    turnSoftwareDataToFormattedCSV(productsList);
-  }, [productsList]);
-
   return (
-    <Dropzone onDrop={(acceptedFiles) => parseCsv(acceptedFiles[0])}>
+    <Dropzone onDrop={(acceptedFiles) => handleFilesDrop(acceptedFiles)}>
       {({ getRootProps, getInputProps }) => (
         <section>
           <div {...getRootProps()}>
