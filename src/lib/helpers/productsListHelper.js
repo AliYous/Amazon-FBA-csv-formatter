@@ -85,7 +85,10 @@ export const addInputDataToFirstProduct = ({
 };
 
 export const generateFileNameFromKeyword = (keyword) => {
-  const dashSeparatedKeyword = keyword.toLowerCase().replace(/ /g, "-");
+  const dashSeparatedKeyword =
+    keyword && keyword !== ""
+      ? keyword.toLowerCase().replace(/ /g, "-")
+      : "H10-clean-report";
   const todayDate = new Date().toLocaleDateString("en-GB");
   return `${dashSeparatedKeyword}-${todayDate}.csv`;
 };
