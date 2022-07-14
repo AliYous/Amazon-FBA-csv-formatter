@@ -20,6 +20,7 @@ const App = () => {
     fbaFee: 0,
     storageFee: 0.5,
     targetPrice: 0,
+    mainKeyword: "",
   });
 
   return (

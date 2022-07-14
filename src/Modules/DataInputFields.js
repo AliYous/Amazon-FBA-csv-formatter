@@ -8,20 +8,23 @@ import {
 import React from "react";
 
 const DataInputFields = ({ inputData, setInputData }) => {
+  const handleMainKeywordChange = (e) => {
+    setInputData({ ...inputData, mainKeyword: e.target.value.toString() });
+  };
   const handleProductCostChange = (e) => {
-    setInputData({ ...inputData, productCost: e.target.value });
+    setInputData({ ...inputData, productCost: e.target.value.toString() });
   };
   const handleShippingCostChange = (e) => {
-    setInputData({ ...inputData, shippingCost: e.target.value });
+    setInputData({ ...inputData, shippingCost: e.target.value.toString() });
   };
   const handleFbaFeeChange = (e) => {
-    setInputData({ ...inputData, fbaFee: e.target.value });
+    setInputData({ ...inputData, fbaFee: e.target.value.toString() });
   };
   const handleStorageFeeChange = (e) => {
-    setInputData({ ...inputData, storageFee: e.target.value });
+    setInputData({ ...inputData, storageFee: e.target.value.toString() });
   };
   const handleTargetPriceChange = (e) => {
-    setInputData({ ...inputData, targetPrice: e.target.value });
+    setInputData({ ...inputData, targetPrice: e.target.value.toString() });
   };
 
   return (
@@ -32,6 +35,21 @@ const DataInputFields = ({ inputData, setInputData }) => {
       direction="column"
       alignItems="center"
     >
+      <Grid item xs={6}>
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel htmlFor="outlined-adornment-amount">
+            Main Keyword
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            label="Main keyword"
+            value={inputData.mainKeyword}
+            onChange={handleMainKeywordChange}
+            variant="outlined"
+            type="text"
+          />
+        </FormControl>
+      </Grid>
       <Grid item xs={6}>
         <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel htmlFor="outlined-adornment-amount">

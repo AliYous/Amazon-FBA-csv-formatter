@@ -1,4 +1,5 @@
 import { helium10KeysMap } from "../keysMap";
+import { generateAmazonSearchResultsUrl } from "./stringHelper";
 
 export const formatProductsList = (productsList) => {
   return productsList.map((virginProduct) => {
@@ -19,8 +20,8 @@ export const convertAllValuesToStringAndReplaceCommas = (productsList) => {
   return productsList.map((product) => {
     const tempProduct = {};
     Object.keys(product).forEach((key) => {
-      if (typeof product[key] === "number") {
-        if (key === "monthlyRevenue") {
+      if (typeof product[key] === "number" || !isNaN(product[key])) {
+        if (key !== "ratings" && key !== "reviewsCount" && key !== "fbaFee") {
           tempProduct[key] = Math.round(product[key])
             .toString()
             .replace(".", ",");
@@ -60,7 +61,11 @@ export const addInputDataToEachProduct = ({
   fbaFee,
   storageFee,
   targetPrice,
+  mainKeyword,
 }) => {
+  const searchResultsUrl = generateAmazonSearchResultsUrl({
+    searchTerm: mainKeyword,
+  });
   return productsList.map((product) => ({
     ...product,
     productCost: productCost,
@@ -68,5 +73,7 @@ export const addInputDataToEachProduct = ({
     fbaFee: fbaFee,
     storageFee: storageFee,
     targetPrice: targetPrice,
+    searchResultsUrl: searchResultsUrl,
+    figmaUrl: "https://www.figma.com/file/new?editor_type=design",
   }));
 };
