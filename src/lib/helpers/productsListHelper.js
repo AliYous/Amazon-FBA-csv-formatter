@@ -55,16 +55,18 @@ export const filterPPCListings = (productsList) => {
 
 export const addInputDataToEachProduct = ({
   productsList,
-  inputCOGS,
-  inputFbaFee,
-  inputStorageFee,
-  inputTargetPrice,
+  productCost,
+  shippingCost,
+  fbaFee,
+  storageFee,
+  targetPrice,
 }) => {
   return productsList.map((product) => ({
     ...product,
-    cogs: inputCOGS,
-    fbaFee: inputFbaFee,
-    storageFee: inputStorageFee,
-    targetPrice: inputTargetPrice,
+    productCost: productCost,
+    shippingCost: shippingCost,
+    fbaFee: fbaFee,
+    storageFee: storageFee,
+    targetPrice: targetPrice,
   }));
 };

@@ -14,8 +14,8 @@ const StyledDropzone = styled(Box)({
   borderRadius: 18,
   cursor: "pointer",
   border: `3px dashed ${palette.blue[30]}`,
-  width: "100%",
   height: "100%",
+  minWidth: "50rem",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -31,8 +31,6 @@ const DropzoneCSVImporter = ({ inputData }) => {
       file: files[0],
       inputData,
     });
-
-    console.log(marketDataArray);
     const unparsedMarketDataCsv = unparseArray(marketDataArray);
     downloadCsv(unparsedMarketDataCsv);
   };

@@ -33,7 +33,7 @@ export const getMarketDataFromCsv = async ({ file, inputData }) => {
 
   const highPerformersListWithInputData = addInputDataToEachProduct({
     productsList: sortedHighPerformersList,
-    inputData,
+    ...inputData,
   });
 
   // Always keep as last step
