@@ -5,6 +5,7 @@ import React from "react";
 import Dropzone from "react-dropzone";
 import palette from "../theme/palette";
 import { TbDragDrop as DragDropIcon } from "react-icons/tb";
+import { SiGooglesheets as SheetsIcon } from "react-icons/si";
 
 const StyledDropzone = styled(Box)({
   backgroundColor: palette.blue[20],
@@ -23,7 +24,7 @@ const StyledDropzone = styled(Box)({
   },
 });
 
-const DropzoneCSVImporter = ({ setUploadedCsv }) => {
+const DropzoneCSVImporter = ({ uploadedCsv, setUploadedCsv }) => {
   const handleFilesDrop = async (files) => {
     setUploadedCsv(files[0]);
   };
@@ -32,10 +33,22 @@ const DropzoneCSVImporter = ({ setUploadedCsv }) => {
     <Dropzone onDrop={(acceptedFiles) => handleFilesDrop(acceptedFiles)}>
       {({ getRootProps, getInputProps }) => (
         <StyledDropzone {...getRootProps()}>
-          <DragDropIcon size={120} style={{ color: palette.grey[50] }} />
           <input {...getInputProps()} />
-          <p style={{ fontWeight: 500, fontSize: "19px" }}>
-            Drop a Helium10 or Jungle Scout report download in this box
+          {uploadedCsv ? (
+            <>
+              <SheetsIcon size={120} style={{ color: palette.grey[50] }} />
+              <p style={{ fontWeight: 500, fontSize: "14px" }}>
+                {uploadedCsv.path}
+              </p>
+            </>
+          ) : (
+            <DragDropIcon size={120} style={{ color: palette.grey[50] }} />
+          )}
+
+          <p style={{ fontWeight: 400, fontSize: "19px" }}>
+            {uploadedCsv
+              ? "Drop another file to replace this one"
+              : "Drag and drop a CSV file here or click to select a file"}
           </p>
         </StyledDropzone>
       )}

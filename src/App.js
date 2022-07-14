@@ -57,7 +57,10 @@ const App = () => {
       </Grid>
       <Grid item>
         <StyledDropzoneContainer container justifyContent="center">
-          <DropzoneCSVImporter setUploadedCsv={setUploadedCsv} />
+          <DropzoneCSVImporter
+            setUploadedCsv={setUploadedCsv}
+            uploadedCsv={uploadedCsv}
+          />
         </StyledDropzoneContainer>
         <GenerateReportButton
           inputData={inputData}
