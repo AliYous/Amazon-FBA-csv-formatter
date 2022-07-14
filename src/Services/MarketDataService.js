@@ -3,7 +3,7 @@ import {
   filterPPCListings,
   findHighPerformers,
   formatProductsList,
-  addInputDataToEachProduct,
+  addInputDataToFirstProduct,
   convertAllValuesToStringAndReplaceCommas,
 } from "../lib/helpers/productsListHelper";
 
@@ -31,7 +31,7 @@ export const getMarketDataFromCsv = async ({ file, inputData }) => {
     return b.monthlyRevenue - a.monthlyRevenue;
   });
 
-  const highPerformersListWithInputData = addInputDataToEachProduct({
+  const highPerformersListWithInputData = addInputDataToFirstProduct({
     productsList: sortedHighPerformersList,
     ...inputData,
   });

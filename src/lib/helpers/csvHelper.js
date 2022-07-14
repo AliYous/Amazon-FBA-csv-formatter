@@ -9,11 +9,11 @@ export const unparseArray = (array) => {
   return Papa.unparse(array);
 };
 
-export const downloadCsv = (csv) => {
+export const downloadCsv = ({ csv, fileName }) => {
   const csvData = new Blob([csv], { type: "text/csv" });
   const csvUrl = URL.createObjectURL(csvData);
   const link = document.createElement("a");
   link.href = csvUrl;
-  link.download = "helium10.csv";
+  link.download = `${fileName}.csv`;
   link.click();
 };

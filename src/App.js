@@ -17,8 +17,8 @@ const App = () => {
   const [inputData, setInputData] = useState({
     productCost: 0,
     shippingCost: 3,
-    fbaFee: 0,
-    storageFee: 0.5,
+    fbaFee: 8,
+    storageFee: 0,
     targetPrice: 0,
     mainKeyword: "",
   });

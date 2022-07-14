@@ -54,7 +54,7 @@ export const filterPPCListings = (productsList) => {
   return productsList.filter(({ title }) => title.indexOf("($)") === -1);
 };
 
-export const addInputDataToEachProduct = ({
+export const addInputDataToFirstProduct = ({
   productsList,
   productCost,
   shippingCost,
@@ -66,8 +66,10 @@ export const addInputDataToEachProduct = ({
   const searchResultsUrl = generateAmazonSearchResultsUrl({
     searchTerm: mainKeyword,
   });
-  return productsList.map((product) => ({
-    ...product,
+
+  const tempProductsList = productsList;
+  const updatedProduct = {
+    ...tempProductsList[0],
     productCost: productCost,
     shippingCost: shippingCost,
     fbaFee: fbaFee,
@@ -75,5 +77,15 @@ export const addInputDataToEachProduct = ({
     targetPrice: targetPrice,
     searchResultsUrl: searchResultsUrl,
     figmaUrl: "https://www.figma.com/file/new?editor_type=design",
-  }));
+  };
+
+  tempProductsList[0] = updatedProduct;
+
+  return tempProductsList;
+};
+
+export const generateFileNameFromKeyword = (keyword) => {
+  const dashSeparatedKeyword = keyword.toLowerCase().replace(/ /g, "-");
+  const todayDate = new Date().toLocaleDateString("en-GB");
+  return `${dashSeparatedKeyword}-${todayDate}.csv`;
 };
